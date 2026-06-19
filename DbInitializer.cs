@@ -291,7 +291,7 @@ namespace Ams
                 var admin = new User
                 {
                     Email = "admin@company.com",
-                    Password = "password123",
+                    Password = "KQualitySoft@369",
                     Role = "admin",
                     Name = "Elena Rostova",
                     Department = "HR & Administration",
@@ -323,6 +323,14 @@ namespace Ams
                     new LeaveRequest { UserId = employee.Id, Name = "Sarah Connor", Type = "Annual Leave", Duration = "5 days (Jun 01-05)", Reason = "Family vacation", Status = "Pending" }
                 );
 
+                context.SaveChanges();
+            }
+
+            // Ensure admin@company.com has the correct password in all environments
+            var adminUser = context.Users.FirstOrDefault(u => u.Email == "admin@company.com");
+            if (adminUser != null && adminUser.Password != "KQualitySoft@369")
+            {
+                adminUser.Password = "KQualitySoft@369";
                 context.SaveChanges();
             }
 
